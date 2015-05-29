@@ -1,0 +1,8 @@
+{
+  "name" : "Fennec CMS",
+  "version" : "1.0",
+  "repositories" : [ {
+    "type" : "composer",
+    "url" : "https://packagist.org/"
+  } ]
+}
