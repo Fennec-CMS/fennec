@@ -1,5 +1,5 @@
 {
-  "name" : "Fennec CMS",
+  "name" : "fennec/fennec",
   "version" : "1.0",
   "repositories" : [ {
     "type" : "composer",
