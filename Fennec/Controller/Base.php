@@ -52,22 +52,13 @@ class Base
 
     public function run()
     {
-        /*
-         * @todo create module manager and remove this route
-         */
-        $route = array(
-            'name' => 'base',
-            'route' => '/pagina/([0-9]+)/',
-            'params' => array(
-                'id'
-            ),
-            'controller' => 'Index',
-            'action' => 'index'
-        );
-        Router::addRoute($route);
+        require_once(__DIR__ . "/../Config/Routes.php");
+
         Router::dispatch();
 
-        $this->params = array_merge($this->params, Router::$params);
+        if (isset(Router::$params)) {
+            $this->params = array_merge($this->params, Router::$params);
+        }
 
         $this->view = Router::$view;
 
