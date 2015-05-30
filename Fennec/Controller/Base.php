@@ -2,6 +2,7 @@
 namespace Fennec\Controller;
 
 use Fennec\Library\Router;
+use Fennec\Library\Http;
 
 class Base
 {
@@ -27,7 +28,7 @@ class Base
         if (file_exists($viewFile)) {
             require_once ($viewFile);
         } else {
-            echo "404";
+            $this->throwHttpError(404);
         }
     }
 
@@ -43,6 +44,12 @@ class Base
         }
 
         return $default;
+    }
+
+    private function throwHttpError($errorCode)
+    {
+        Http::changeHeader($errorCode);
+        $this->loadView("Error/$errorCode");
     }
 
     public function getParams()
