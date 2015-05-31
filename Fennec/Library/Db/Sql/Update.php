@@ -89,7 +89,7 @@ class Update
             Db::commit();
         } catch (\Exception $e) {
             Db::rollBack();
-            die($e->getMessage());
+            throw $e;
         }
     }
 
