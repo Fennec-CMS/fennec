@@ -24,7 +24,7 @@ class Base
     public function loadView($viewFile)
     {
         $viewFile = __DIR__ . "/../View/$viewFile.phtml";
-        
+
         if (file_exists($viewFile)) {
             require_once ($viewFile);
         } else {
@@ -48,8 +48,10 @@ class Base
 
     protected function throwHttpError($errorCode)
     {
+        ob_clean();
         Http::changeHeader($errorCode);
-        $this->loadView("Error/$errorCode");
+        $this->view = "Error/$errorCode";
+        require ($this->layout);
     }
 
     public function getParams()
@@ -71,7 +73,12 @@ class Base
         $this->view = Router::$view;
 
         if ($this->layout) {
-            require_once ($this->layout);
+            try {
+                require_once ($this->layout);
+            } catch (\Exception $e) {
+                $this->exception = $e;
+                $this->throwHttpError(500);
+            }
         }
     }
 }

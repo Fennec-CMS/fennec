@@ -73,12 +73,7 @@ class Db
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
             );
             
-            try {
-                self::$connection = new \PDO($dsn, self::$user, self::$password, $options);
-            } catch (\Exception $e) {
-                echo $e->getMessage();
-                exit();
-            }
+            self::$connection = new \PDO($dsn, self::$user, self::$password, $options);
         }
         
         return self::$connection;
