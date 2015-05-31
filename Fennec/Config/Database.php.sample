@@ -1,0 +1,12 @@
+<?php
+/**
+ * This is the Fennec CMS database configuration file
+ * Remember to rename it to "Database.php" and configure with valid database connection data
+ */
+use Fennec\Library\Db\Db;
+
+Db::$dbms = '';
+Db::$host = '';
+Db::$user = '';
+Db::$password = '';
+Db::$database = '';
