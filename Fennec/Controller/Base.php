@@ -46,7 +46,7 @@ class Base
         return $default;
     }
 
-    private function throwHttpError($errorCode)
+    protected function throwHttpError($errorCode)
     {
         Http::changeHeader($errorCode);
         $this->loadView("Error/$errorCode");
