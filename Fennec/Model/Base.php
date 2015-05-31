@@ -55,6 +55,7 @@ class Base
         
         if ($type == "set") {
             $this->$param = $arguments[0];
+            return $this;
         } elseif ($type == "get") {
             return $this->$param;
         } else {
