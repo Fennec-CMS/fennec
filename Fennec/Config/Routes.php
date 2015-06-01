@@ -6,7 +6,8 @@ $routes = array(
         'name' => 'base',
         'route' => '/pagina/',
         'controller' => 'Index',
-        'action' => 'index'
+        'action' => 'index',
+        'layout' => 'Default'
     )
 );
 

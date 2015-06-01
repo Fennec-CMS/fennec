@@ -1,7 +1,6 @@
 <?php
 namespace Fennec\Controller;
 
-use Fennec\Library\Router;
 use Fennec\Library\Http;
 
 class Base
@@ -46,7 +45,7 @@ class Base
         return $default;
     }
 
-    protected function throwHttpError($errorCode)
+    public function throwHttpError($errorCode)
     {
         ob_clean();
         Http::changeHeader($errorCode);
@@ -59,19 +58,8 @@ class Base
         return $this->params;
     }
 
-    public function run()
+    public function loadLayout()
     {
-        require_once(__DIR__ . "/../Config/Routes.php");
-        require_once(__DIR__ . "/../Config/Database.php");
-
-        Router::dispatch();
-
-        if (isset(Router::$params)) {
-            $this->params = array_merge($this->params, Router::$params);
-        }
-
-        $this->view = Router::$view;
-
         if ($this->layout) {
             try {
                 require_once ($this->layout);

@@ -30,11 +30,22 @@ class Router
                 }
 
                 self::$matchingRoute = $route;
-                
-                self::$view = $route['controller'] . "/" . $route['action'];
-                
+
+                $controller = "Fennec\\Controller\\{$route['controller']}";
+                $action = $route['action'] . "Action";
+
+                $controller = new $controller();
+                $controller->layout($route['layout']);
+                $controller->$action();
+                $controller->view = $route['controller'] . "/" . $route['action'];
+                $controller->loadLayout();
+
                 return;
             }
         }
+
+        $controller = new \Fennec\Controller\Base();
+        $controller->layout('Default');
+        $controller->throwHttpError(404);
     }
 }
