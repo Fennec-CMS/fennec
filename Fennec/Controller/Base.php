@@ -1,17 +1,52 @@
 <?php
+/**
+ ************************************************************************
+ * @copyright 2015 David Lima
+ * @license Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+ ************************************************************************
+ */
 namespace Fennec\Controller;
 
 use Fennec\Library\Http;
 
+/**
+ * Base controller
+ *
+ * @author David Lima
+ * @version b0.1
+ */
 class Base
 {
 
+    /**
+     * Layout to load.
+     * Must be a valid .phtml file in Fennec/Layout/
+     *
+     * @var string
+     */
     public $layout;
 
+    /**
+     * View to load.
+     * Must be a valid .phtml file in Fennec/View
+     *
+     * @var string
+     */
     public $view;
 
+    /**
+     * GET params
+     *
+     * @var string
+     */
     private $params = array();
 
+    /**
+     * Sets layout if file $layout exists.
+     * Do nothing otherwise
+     *
+     * @param string $layout
+     */
     public function layout($layout)
     {
         $layout = __DIR__ . "/../Layout/$layout.phtml";
@@ -20,6 +55,11 @@ class Base
         }
     }
 
+    /**
+     * Load a view
+     *
+     * @param string $viewFile
+     */
     public function loadView($viewFile)
     {
         $viewFile = __DIR__ . "/../View/$viewFile.phtml";
@@ -31,11 +71,24 @@ class Base
         }
     }
 
+    /**
+     * Sets a GET param
+     *
+     * @param string $key
+     * @param multitype $value
+     */
     public function setParam($key, $value)
     {
         $this->params[$key] = $value;
     }
 
+    /**
+     * Return a GET param
+     *
+     * @param string $key
+     * @param string $default
+     * @return string
+     */
     public function getParam($key, $default = null)
     {
         if (isset($this->params[$key])) {
@@ -45,6 +98,11 @@ class Base
         return $default;
     }
 
+    /**
+     * Throws an HTTP error
+     *
+     * @param integer $errorCode
+     */
     public function throwHttpError($errorCode)
     {
         ob_clean();
@@ -53,11 +111,19 @@ class Base
         require ($this->layout);
     }
 
+    /**
+     * Return all GET params
+     *
+     * @return \Fennec\Controller\string
+     */
     public function getParams()
     {
         return $this->params;
     }
 
+    /**
+     * Try to load $this->layout
+     */
     public function loadLayout()
     {
         if ($this->layout) {

@@ -1,23 +1,63 @@
 <?php
+/**
+ ************************************************************************
+ * @copyright 2015 David Lima
+ * @license Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+ ************************************************************************
+ */
 namespace Fennec\Library;
 
+/**
+ * Fennec CMS router
+ *
+ * @author David Lima
+ * @version b0.1
+ */
 class Router
 {
 
+    /**
+     * All registered routes
+     *
+     * @var array
+     */
     public static $routes = array();
 
+    /**
+     * Route that matches with current URI
+     *
+     * @var string
+     */
     public static $matchingRoute = null;
 
+    /**
+     * View to load
+     *
+     * @var string
+     */
     public static $view;
 
+    /**
+     * GET params
+     *
+     * @var array
+     */
     public static $params = array();
 
+    /**
+     * Append a route
+     *
+     * @param array $route
+     */
     public static function addRoute(array $route)
     {
         $route['route'] = "/" . str_replace("/", "\\/", $route['route']) . "/is";
         self::$routes[$route['name']] = $route;
     }
 
+    /**
+     * Search by a matching route and load it's controller/action
+     */
     public static function dispatch()
     {
         $url = $_SERVER['REQUEST_URI'];

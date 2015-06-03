@@ -1,11 +1,33 @@
 <?php
+/**
+ ************************************************************************
+ * @copyright 2015 David Lima
+ * @license Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+ ************************************************************************
+ */
 namespace Fennec\Library;
 
+/**
+ * HTTP funcions
+ *
+ * @author David Lima
+ * @version b0.1
+ */
 class Http
 {
 
+    /**
+     * HTTP version to use
+     *
+     * @var string
+     */
     CONST HTTP_VERSION = "1.1";
 
+    /**
+     * Available HTTP response codes
+     *
+     * @var array
+     */
     public static $codes = array(
         "1.1" => array(
             100 => "Continue",
@@ -51,6 +73,12 @@ class Http
         )
     );
 
+    /**
+     * Changes actual HTTP header
+     *
+     * @param integer $code
+     * @return integer
+     */
     public static function changeHeader($code)
     {
         $codes = self::$codes[self::HTTP_VERSION];
