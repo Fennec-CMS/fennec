@@ -135,4 +135,28 @@ class Base
             }
         }
     }
+
+    /**
+     * Determine if request is a post
+     *
+     * @return boolean
+     */
+    protected function isPost()
+    {
+        return (isset($_POST) && $_POST);
+    }
+
+    /**
+     * If request is a post, return $_POST or a $_POST key
+     *
+     * @param string $key
+     * @return multitype|boolean
+     */
+    protected function getPost($key = null)
+    {
+        if ($this->isPost()) {
+            return ($key ? $_POST[$key] : $_POST);
+        }
+        return false;
+    }
 }
