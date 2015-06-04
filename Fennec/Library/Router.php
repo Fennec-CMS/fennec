@@ -76,8 +76,8 @@ class Router
 
                 $controller = new $controller();
                 $controller->layout($route['layout']);
-                $controller->$action();
                 $controller->view = str_replace("\\", "/", $route['controller']) . "/" . $route['action'];
+                $controller->$action();
                 $controller->loadLayout();
 
                 return;
