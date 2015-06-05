@@ -18,7 +18,7 @@ use Fennec\Library\Db\Sql\Delete;
  * @author David Lima
  * @version b0.1
  */
-class Sql
+trait Sql
 {
 
     /**

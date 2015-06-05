@@ -7,7 +7,6 @@
  */
 namespace Fennec\Model;
 
-use Fennec\Library\Db\Sql;
 
 /**
  * Basic model class
@@ -17,6 +16,7 @@ use Fennec\Library\Db\Sql;
  */
 class Base
 {
+    use \Fennec\Library\Db\Sql;
 
     /**
      * Return a param
@@ -75,8 +75,7 @@ class Base
             throw new \Exception("Table for " . static::class . " not defined");
         }
         
-        $conn = new Sql();
-        return $conn->select("*")
+        return $this->select("*")
             ->from(static::$table)
             ->execute();
     }
