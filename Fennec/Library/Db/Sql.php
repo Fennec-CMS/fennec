@@ -13,7 +13,7 @@ use Fennec\Library\Db\Sql\Update;
 use Fennec\Library\Db\Sql\Delete;
 
 /**
- * SQL management class
+ * SQL management trait
  *
  * @author David Lima
  * @version b0.1
