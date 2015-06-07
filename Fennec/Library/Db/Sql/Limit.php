@@ -27,7 +27,7 @@ trait Limit
      * Defines SQL LIMIT
      * 
      * @param integer $limit            
-     * @return \Fennec\Library\Db\Sql\Limit
+     * @return \Fennec\Library\Db\Sql\Select|\Fennec\Library\Db\Sql\Update\Fennec\Library\Sql\Delete
      */
     public function limit($limit)
     {

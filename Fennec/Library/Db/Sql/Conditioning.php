@@ -27,8 +27,8 @@ trait Conditioning
     /**
      * Defines SQL WHERE condition
      *
-     * @param string $condition            
-     * @return \Fennec\Library\Db\Sql\Conditioning
+     * @param string $condition
+     * @return \Fennec\Library\Db\Sql\Select|\Fennec\Library\Db\Sql\Update\Fennec\Library\Sql\Delete
      */
     public function where($condition)
     {
