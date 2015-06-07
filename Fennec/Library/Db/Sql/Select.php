@@ -64,13 +64,22 @@ class Select
     private $sql;
 
     /**
+     * Classname to hydrate with Fetch
+     *
+     * @var string
+     */
+    private $class;
+
+    /**
      * Shortcut to select() method
      *
-     * @param array|string $column            
+     * @param array|string $column
+     * @param string $class
      */
-    public function __construct($column)
+    public function __construct($column, $class = null)
     {
         $this->select($column);
+        $this->class = $class;
     }
 
     /**
@@ -192,7 +201,12 @@ class Select
     public function execute()
     {
         $this->mountSql();
-        return Db::query($this->sql);
+        $query = Db::query($this->sql);
+        if ($this->class) {
+            $query->setFetchMode(\PDO::FETCH_CLASS, $this->class);
+        }
+
+        return $query;
     }
 
     /**

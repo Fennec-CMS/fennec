@@ -29,7 +29,7 @@ trait Sql
      */
     public function select($column = '*')
     {
-        return new Select($column);
+        return new Select($column, get_class($this));
     }
 
     /**

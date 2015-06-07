@@ -113,7 +113,7 @@ class Db
      * Runs a SQL query
      *
      * @param string $sql            
-     * @return boolean
+     * @return \PDOStatement
      */
     public static function query($sql)
     {
