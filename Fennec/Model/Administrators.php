@@ -7,8 +7,6 @@
  */
 namespace Fennec\Model;
 
-use Fennec\Library\Db\Sql;
-
 /**
  * Administrators model
  *
@@ -61,8 +59,8 @@ class Administrators extends Base
      * @var integer
      */
     public $id;
-
     /**
+
      * Creates a new administrator
      *
      * @return PDOStatement
@@ -70,8 +68,7 @@ class Administrators extends Base
     public function create()
     {
         $data = $this->prepare();
-        $sql = new Sql();
-        return $sql->insert($data)
+        return $this->insert($data)
             ->into(self::$table)
             ->execute();
     }
