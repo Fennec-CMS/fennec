@@ -74,6 +74,31 @@ class Administrators extends Base
     }
 
     /**
+     * Authenticate an user
+     *
+     * @return boolean
+     */
+    public function authenticate()
+    {
+        $this->username = filter_var($this->username, \FILTER_SANITIZE_STRING);
+        $userExists = $this->select('*')
+                            ->from(self::$table)
+                            ->where("username = '{$this->username}'")
+                            ->limit(1)
+                            ->execute();
+        $userData = $userExists->fetch();
+
+        if ($userData) {
+            if ($this->verify($this->password, $userData->getPassword())) {
+                $_SESSION['fennecAdmin'] = $userData;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Prepare data to create administrator
      *
      * @return multitype:string |multitype:\Fennec\Model\string \Fennec\Model\integer
@@ -86,12 +111,14 @@ class Administrators extends Base
         }
         
         $this->name = filter_var($this->name, \FILTER_SANITIZE_STRING);
+        $this->username = filter_var($this->username, \FILTER_SANITIZE_STRING);
         $this->email = filter_var($this->email, \FILTER_SANITIZE_EMAIL);
         $this->password = self::hash($this->password);
         $this->profile = 1; // needs profile manager
         
         return array(
             'name' => $this->name,
+            'username' => $this->username,
             'email' => $this->email,
             'password' => $this->password,
             'profile' => $this->profile

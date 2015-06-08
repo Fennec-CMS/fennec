@@ -8,6 +8,13 @@ $routes = array(
         'controller' => 'Index',
         'action' => 'index',
         'layout' => 'Default'
+    ),
+    array(
+        'name' => 'admin',
+        'route' => '/admin/',
+        'controller' => 'Admin\\Index',
+        'action' => 'index',
+        'layout' => 'Default'
     )
 );
 
