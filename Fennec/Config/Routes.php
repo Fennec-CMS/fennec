@@ -4,7 +4,7 @@ use Fennec\Library\Router;
 $routes = array(
     array(
         'name' => 'base',
-        'route' => '/pagina/',
+        'route' => '/',
         'controller' => 'Index',
         'action' => 'index',
         'layout' => 'Default'
