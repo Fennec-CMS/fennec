@@ -7,6 +7,8 @@ spl_autoload_register(function ($file) {
     require_once($file);
 });
 
+session_start();
+
 $fennec = new Fennec\Application();
 
 $fennec->run();
