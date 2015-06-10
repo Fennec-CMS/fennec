@@ -28,6 +28,7 @@ class Index extends Base
             $this->view = 'Admin/Index/dashboard';
             $this->dashboardAction();
         } else {
+            $this->layout('Admin/Unauthenticated');
             $this->view = 'Admin/Index/login';
             $this->loginAction();
         }
@@ -56,12 +57,13 @@ class Index extends Base
 
             if (! $this->isAuthenticated()) {
                 $this->errors = array(
-                    'Cannot authenticate'
+                    'Cannot authenticate you :('
                 );
             }
         }
 
         if ($this->isAuthenticated()) {
+            $this->layout('Admin/Default');
             $this->view = 'Admin/Index/dashboard';
             $this->dashboardAction();
         }

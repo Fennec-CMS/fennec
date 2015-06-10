@@ -14,7 +14,14 @@ $routes = array(
         'route' => '/admin/',
         'controller' => 'Admin\\Index',
         'action' => 'index',
-        'layout' => 'Default'
+        'layout' => 'Admin/Default'
+    ),
+    array(
+        'name' => 'admin-login',
+        'route' => '/admin/login/',
+        'controller' => 'Admin\\Index',
+        'action' => 'login',
+        'layout' => 'Admin/Unauthenticated'
     )
 );
 
