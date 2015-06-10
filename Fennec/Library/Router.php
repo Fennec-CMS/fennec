@@ -51,7 +51,7 @@ class Router
      */
     public static function addRoute(array $route)
     {
-        $route['route'] = "/" . str_replace("/", "\\/", $route['route']) . "/is";
+        $route['route'] = "/^" . str_replace("/", "\\/", $route['route']) . "$/is";
         self::$routes[$route['name']] = $route;
     }
 
@@ -61,8 +61,15 @@ class Router
     public static function dispatch()
     {
         $url = $_SERVER['REQUEST_URI'];
+        $requestedRoute = strstr('/', $url);
+        $requestedRoute = substr($url, $requestedRoute);
+        
+        if (! $requestedRoute){
+            $requestedRoute = "/";
+        }
+        
         foreach (self::$routes as $route) {
-            if (preg_match($route['route'], $url, $matches)) {
+            if (preg_match($route['route'], $requestedRoute, $matches)) {
 
                 if (isset($route['params']) && $route['params']) {
                     array_shift($matches);
