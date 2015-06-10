@@ -4,5 +4,5 @@ Fennec is a free, open source and highly customizable Content Management System.
 
 The proposal here is to have an modern, fast, customizable base system to deploy any type of dynamic website.
 
-For now, the first test version is in development and it's not usable at all. However, if you want to support the project, don't be shy, [let me know](dave@blogdodave.com.br) ;)
+For now, the first test version is in development and it's not usable at all. However, if you want to support the project, don't be shy, [let me know](http://blogdodave.com.br/contato) (or at dave@blogdodave.com.br) ;)
 
