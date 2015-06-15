@@ -67,7 +67,7 @@ class Router
         if (! $requestedRoute){
             $requestedRoute = "/";
         }
-        
+
         foreach (self::$routes as $route) {
             if (preg_match($route['route'], $requestedRoute, $matches)) {
 
@@ -78,19 +78,37 @@ class Router
 
                 self::$matchingRoute = $route;
 
-                $controller = "Fennec\\Controller\\{$route['controller']}";
+                $module = isset($route['module']) ? "Modules\\" . $route['module'] . "\\" : null;
+
+                $controller = "Fennec\\{$module}Controller\\{$route['controller']}";
                 $action = $route['action'] . "Action";
 
                 $controller = new $controller();
-                $controller->layout($route['layout']);
-                $controller->view = str_replace("\\", "/", $route['controller']) . "/" . $route['action'];
+
+                if ($controller->module !== false) {
+                    $controller->module = $module;
+                }
+
+                if (! $controller->layout) {
+                    $controller->layout($route['layout']);
+                }
+
+                if (! $controller->view) {
+                    $controller->view = str_replace("\\", "/", ($module ? $module . 'View/' : null) . $route['controller']) . "/" . $route['action'];
+                } else {
+                    $action = strrpos($controller->view, '/') + 1;
+                    $action = substr($controller->view, $action) . 'Action';
+
+                    $controller->view = str_replace("\\", "/", $controller->view);
+                }
+
                 $controller->$action();
+
                 $controller->loadLayout();
 
                 return;
             }
         }
-
         $controller = new \Fennec\Controller\Base();
         $controller->layout('Default');
         $controller->throwHttpError(404);

@@ -18,11 +18,32 @@ use Fennec\Library\Router;
 class Application
 {
 
+    /**
+     * Runs the applicatoin
+     */
     public function run()
     {
         require_once (__DIR__ . "/Config/Routes.php");
         require_once (__DIR__ . "/Config/Database.php");
 
+        $this->loadModules();
+
         Router::dispatch();
+    }
+
+    /**
+     * Load all modules
+     */
+    private function loadModules()
+    {
+        $modulesDir = new \DirectoryIterator(__DIR__ . '/Modules/');
+        foreach ($modulesDir as $dir) {
+            if ($dir->isDot())
+                continue;
+
+            $module = $dir->getFilename();
+
+            require_once (__DIR__ . "/Modules/$module/Routes.php");
+        }
     }
 }

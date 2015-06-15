@@ -27,6 +27,13 @@ class Base
     public $layout;
 
     /**
+     * Determines if it is a custom Fennec module
+     * 
+     * @var string
+     */
+    public $module;
+
+    /**
      * View to load.
      * Must be a valid .phtml file in Fennec/View
      *
@@ -62,7 +69,11 @@ class Base
      */
     public function loadView($viewFile)
     {
-        $viewFile = __DIR__ . "/../View/$viewFile.phtml";
+        if ($this->module) {
+            $viewFile = __DIR__ . "/../$viewFile.phtml";
+        } else {
+            $viewFile = __DIR__ . "/../View/$viewFile.phtml";
+        }
 
         if (file_exists($viewFile)) {
             require_once ($viewFile);

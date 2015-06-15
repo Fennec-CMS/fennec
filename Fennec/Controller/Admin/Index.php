@@ -20,19 +20,23 @@ class Index extends Base
 {
 
     /**
-     * Default action
+     * Runs base authentication
      */
-    public function indexAction()
+    public function __construct()
     {
-        if ($this->isAuthenticated()) {
-            $this->view = 'Admin/Index/dashboard';
-            $this->dashboardAction();
-        } else {
+        if (! $this->isAuthenticated()) {
             $this->layout('Admin/Unauthenticated');
+            $this->module = false;
             $this->view = 'Admin/Index/login';
             $this->loginAction();
         }
     }
+
+    /**
+     * Default action
+     */
+    public function indexAction()
+    {}
 
     /**
      * Default logged page action
