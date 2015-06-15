@@ -11,7 +11,7 @@ $routes = array(
         'layout' => 'Default'
     ),
     array(
-        'name' => 'blog-sample',
+        'name' => 'sample-admin',
         'route' => '/admin/sample/',
         'module' => 'Sample',
         'controller' => 'Admin\\Index',
