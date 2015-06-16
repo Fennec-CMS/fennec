@@ -3,9 +3,9 @@
         <div class="col-xs-4"></div>
         <div class="col-xs-4">
 <?php
-if ($this->errors){
+if (isset($this->errors)){
     echo '<div class="alert alert-danger">';
-    foreach ($this->errors as $errorMessage){
+    foreach ($this->errors as $errorMessage) {
         echo $errorMessage . '<br>';
     }
     echo '</div>';
