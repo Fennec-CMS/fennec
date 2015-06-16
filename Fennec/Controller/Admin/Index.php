@@ -74,6 +74,19 @@ class Index extends Base
     }
 
     /**
+     * Logout action
+     */
+    public function logoutAction()
+    {
+        if ($this->isAuthenticated()) {
+            unset($_SESSION['fennecAdmin']);
+        }
+
+        header("Location: /");
+        exit();
+    }
+
+    /**
      * Check if there is an user authenticated
      * 
      * @return boolean

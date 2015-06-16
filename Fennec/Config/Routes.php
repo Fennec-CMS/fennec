@@ -22,6 +22,13 @@ $routes = array(
         'controller' => 'Admin\\Index',
         'action' => 'login',
         'layout' => 'Admin/Unauthenticated'
+    ),
+    array(
+        'name' => 'admin-logout',
+        'route' => '/admin/logout/',
+        'controller' => 'Admin\\Index',
+        'action' => 'logout',
+        'layout' => 'Admin/Default'
     )
 );
 
