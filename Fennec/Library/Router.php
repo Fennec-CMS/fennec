@@ -51,6 +51,7 @@ class Router
      */
     public static function addRoute(array $route)
     {
+        $route['original-route'] = $route['route'];
         $route['route'] = "/^" . str_replace("/", "\\/", $route['route']) . "$/is";
         self::$routes[$route['name']] = $route;
     }

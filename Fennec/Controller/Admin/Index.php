@@ -20,6 +20,12 @@ class Index extends Base
 {
 
     /**
+     * Fennec sidebar menu
+     * @var array
+     */
+    public $menu = array();
+
+    /**
      * Runs base authentication
      */
     public function __construct()
@@ -30,6 +36,8 @@ class Index extends Base
             $this->view = 'Admin/Index/login';
             $this->loginAction();
         }
+
+        $this->loadMenu();
     }
 
     /**
@@ -94,5 +102,17 @@ class Index extends Base
     private function isAuthenticated()
     {
         return (isset($_SESSION['fennecAdmin']) && $_SESSION['fennecAdmin'] instanceof \Fennec\Model\Administrators);
+    }
+
+    /**
+     * Hydrate $this->menu with Menu items
+     */
+    private function loadMenu()
+    {
+        $menuFile = __DIR__ . '/../../Config/Admin/Menu.php';
+
+        if (file_exists($menuFile)) {
+            $this->menu = require_once($menuFile);
+        }
     }
 }

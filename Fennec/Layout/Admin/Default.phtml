@@ -69,7 +69,60 @@
       <section class="sidebar">
         <ul class="sidebar-menu">
           <li class="header">MODULES</li>
+<?php
+foreach ($this->menu as $title => $menu) {
+    $class = array();
+    $isMultilevel = (isset($menu['subitems']) && count($menu['subitems']));
+    $class[] = ($isMultilevel ? 'treeview' : '');
+    $controller = addslashes(Fennec\Library\Router::$routes[$menu['route']]['controller']);
+
+    if (preg_match("/$controller/", get_class($this))) {
+        $class[] = 'active';
+    }
+    $class = implode(" ", $class);
+?>
+            <li<?php echo $class ? " class=\"$class\"" : null;?>>
+                <a href="<?php echo Fennec\Library\Router::$routes[$menu['route']]['original-route'];?>"><?php echo $title;?></a>
+<?php
+    if ($isMultilevel) {
+?>
+                <ul class="treeview-menu">
+<?php
+        foreach($menu['subitems'] as $name => $subRoute) {
+?>
+                    <li>
+                        <a href="<?php echo Fennec\Library\Router::$routes[$subRoute]['original-route'];?>">
+                            <span><?php echo $name;?></span>
+                        </a>
+                    </li>
+<?php
+        }
+?>
+                </ul>
+<?php
+    }
+?>
+            </li>
+<?php
+}
+?>
         </ul>
+
+
+
+        <!-- <ul class="sidebar-menu">
+            <li class="active"><a href="#"><i class='fa fa-link'></i> <span>Link</span></a></li>
+            <li><a href="#"><i class='fa fa-link'></i> <span>Another Link</span></a></li>
+            <li class="treeview">
+              <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#">Link in level 2</a></li>
+                <li><a href="#">Link in level 2</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          -->
       </section>
     </aside>
 
