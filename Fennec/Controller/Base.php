@@ -8,6 +8,7 @@
 namespace Fennec\Controller;
 
 use Fennec\Library\Http;
+use Fennec\Library\Router;
 
 /**
  * Base controller
@@ -145,6 +146,32 @@ class Base
                 $this->throwHttpError(500);
             }
         }
+    }
+
+    /**
+     * Return a route relative link
+     *
+     * @param string $route
+     */
+    public function linkToRoute($route, $params = null)
+    {
+        $originalRoute = Router::$routes[$route]['original-route'];
+
+        if (strpos($originalRoute, '(') > -1) {
+            $link = strstr($originalRoute, '(', true);
+        } else {
+            $link = $originalRoute;
+        }
+
+        if (isset($params)) {
+            $params = implode('/', $params);
+            if (substr($originalRoute, -1) != ")") {
+                $params .= substr($originalRoute, -1);
+            }
+            $link .= $params;
+        }
+
+        return $link;
     }
 
     /**
