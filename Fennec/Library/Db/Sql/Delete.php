@@ -88,8 +88,8 @@ class Delete
     {
         $this->sql = "DELETE FROM " . $this->from;
         
-        $this->sql .= ($this->where ? ' WHERE' . $this->where : '');
-        $this->sql .= ($this->limit ? ' LIMIT' . $this->limit : '');
+        $this->sql .= ($this->where ? ' WHERE ' . $this->where : '');
+        $this->sql .= ($this->limit ? ' LIMIT ' . $this->limit : '');
         
         return $this->sql;
     }
