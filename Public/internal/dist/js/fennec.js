@@ -44,6 +44,12 @@ $(document).ready(function(){
 		e.preventDefault();
 		return false;
 	});
+	
+	if ("datetimepicker" in $(window)) {
+		$('.datetime').datetimepicker({
+			format: 'YYYY-MM-DD HH:mm'
+		});
+	}
 });
 
 function alert(message, callback) {
