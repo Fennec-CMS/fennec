@@ -103,6 +103,12 @@ class Router
                     $controller->view = str_replace("\\", "/", $controller->view);
                 }
 
+                if (self::$params) {
+                    foreach (self::$params as $key => $val) {
+                        $controller->setParam($key, $val);
+                    }
+                }
+
                 $controller->$action();
 
                 $controller->loadLayout();
