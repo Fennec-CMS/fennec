@@ -54,16 +54,6 @@ class Index extends Base
     {}
 
     /**
-     * Default logged page action
-     */
-    public function dashboardAction()
-    {
-        /**
-         * @todo put some dashboard data here
-         */
-    }
-
-    /**
      * Login page action
      */
     public function loginAction()
@@ -83,8 +73,8 @@ class Index extends Base
 
         if ($this->isAuthenticated()) {
             $this->layout('Admin/Default');
-            $this->view = 'Admin/Index/dashboard';
-            $this->dashboardAction();
+            $this->view = 'Admin/Index/index';
+            $this->indexAction();
         }
     }
 
