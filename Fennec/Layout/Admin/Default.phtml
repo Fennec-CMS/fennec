@@ -41,7 +41,7 @@
                 <li class="user-header">
                   <img src="/internal/dist/img/fennec/logo-blue.png" class="img-circle" alt="User Image" />
                   <p>
-                   Jack The Fox <small>Administrator since Jun. 2015</small>
+                   <?php echo $_SESSION['fennecAdmin']->getName();?> <small>Administrator since <?php echo $_SESSION['fennecAdmin']->getSince()->format('M. Y');?></small>
                   </p>
                 </li>
 

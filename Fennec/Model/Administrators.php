@@ -105,6 +105,7 @@ class Administrators extends Base
 
         if ($userData) {
             if ($this->verify($this->password, $userData->getPassword())) {
+                $userData->setSince(new \DateTime($userData->getSince()));
                 $_SESSION['fennecAdmin'] = $userData;
                 return true;
             }
