@@ -1,0 +1,54 @@
+<div class="pull-left">
+    <div class="btn-group">
+        <a href="<?php echo $this->linkToRoute('admin-administrators-add');?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> Create new</a>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<br>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+<?php
+foreach ($this->list as $admin) {
+?>
+                <tr>
+                    <td><?php echo $admin->getName() . ($admin->getId() == $_SESSION['fennecAdmin']->getId() ? ' <b>(You)</b>' : '');?></td>
+                    <td><?php echo $admin->getUsername();?></td>
+                    <td><?php echo $admin->getEmail();?></td>
+                    <td style="width:150px;">
+                        <div class="btn-group">
+                            <a href="<?php echo $this->linkToRoute('admin-administrators-profile', array($admin->getId()));?>" class="btn btn-default btn-sm">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        
+<?php
+    if ($admin->getId() != $_SESSION['fennecAdmin']->getId()) {
+?>
+                            <a href="<?php echo $this->linkToRoute('admin-administrators-delete', array($admin->getId()));?>" class="btn btn-danger btn-sm btn-delete">
+                                <i class="fa fa-trash"></i>
+                            </a>
+<?php
+    }
+?>
+                        </div>
+                    </td>
+                </tr>
+<?php
+}
+?>
+            </tbody>
+        </table>
+    </div>
+</div>

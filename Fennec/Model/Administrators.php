@@ -68,9 +68,24 @@ class Administrators extends Base
     public function create()
     {
         $data = $this->prepare();
-        return $this->insert($data)
-            ->into(self::$table)
-            ->execute();
+
+        if (isset($data['valid']) && ! $data['valid']){
+            return $data;
+        } else {
+            try {
+                $this->insert($data)
+                    ->into(self::$table)
+                    ->execute();
+                return array(
+                    'result' => 'Administrator created!'
+                );
+            } catch (\Exception $e) {
+                return array(
+                    'result' => 'Failed to create administrator!',
+                    'errors' => $e->getMessage()
+                );
+            }
+        }
     }
 
     /**
@@ -99,6 +114,30 @@ class Administrators extends Base
     }
 
     /**
+     * Perform a SQL delete
+     *
+     * @return multitype:string |multitype:string NULL
+     */
+    public function remove()
+    {
+        $this->id = intval($this->id);
+        try {
+            $this->delete()
+            ->from(self::$table)
+            ->where("id = '$this->id'")
+            ->execute();
+            return array(
+                'result' => 'Administrator removed!'
+            );
+        } catch (\Exception $e) {
+            return array(
+                'result' => 'Failed to remove administrator!',
+                'errors' => $e->getMessage()
+            );
+        }
+    }
+
+    /**
      * Prepare data to create administrator
      *
      * @return multitype:string |multitype:\Fennec\Model\string \Fennec\Model\integer
@@ -106,7 +145,7 @@ class Administrators extends Base
     private function prepare()
     {
         $errors = $this->validate();
-        if ($errors) {
+        if (! $errors['valid']) {
             return $errors;
         }
         
@@ -132,12 +171,26 @@ class Administrators extends Base
      */
     private function validate()
     {
-        $errors = array();
-        
-        if (! filter_var($this->email, \FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = "Email inválido";
+        $validation = array(
+            'valid' => true,
+            'errors' => array()
+        );
+
+        if (! $this->name) {
+            $validation['valid'] = false;
+            $validation['errors']['name'] = "Name is a required field";
         }
-        
-        return $errors;
+
+        if (! $this->username) {
+            $validation['valid'] = false;
+            $validation['errors']['username'] = "Username is a required field";
+        }
+
+        if (! filter_var($this->email, \FILTER_VALIDATE_EMAIL)) {
+            $validation['valid'] = false;
+            $validation['errors']['email'] = "Invalid email";
+        }
+
+        return $validation;
     }
 }
