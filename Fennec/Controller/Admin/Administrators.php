@@ -33,6 +33,11 @@ class Administrators extends AdminController
     {
         parent::__construct();
         $this->model = new AdministratorsModel();
+
+        $this->moduleInfo = array(
+            'title' => 'Administrators',
+            'subtitle' => 'Manage website administrators'
+        );
     }
 
     /**
