@@ -9,6 +9,7 @@ namespace Fennec\Controller\Admin;
 
 use Fennec\Controller\Base;
 use Fennec\Model\Administrators;
+use Fennec\Library\Router;
 
 /**
  * Administration base controller
@@ -73,8 +74,8 @@ class Index extends Base
 
         if ($this->isAuthenticated()) {
             $this->layout('Admin/Default');
-            $this->view = 'Admin/Index/index';
-            $this->indexAction();
+            unset($_POST);
+            Router::dispatch();
         }
     }
 
