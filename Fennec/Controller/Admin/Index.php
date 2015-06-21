@@ -26,6 +26,13 @@ class Index extends Base
     public $menu = array();
 
     /**
+     * Info to be shown on module internal pages
+     *
+     * @var array
+     */
+    public $moduleInfo = array();
+
+    /**
      * Runs base authentication
      */
     public function __construct()

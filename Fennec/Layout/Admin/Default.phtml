@@ -122,11 +122,18 @@ foreach ($this->menu as $title => $menu) {
     </aside>
 
     <div class="content-wrapper">
+<?php
+if ($this->moduleInfo) {
+?>
       <section class="content-header">
         <h1>
-          Dashboard <small>Your favorite modules</small>
+          <?php echo $this->moduleInfo['title'];?>
+          <?php echo (isset($this->moduleInfo['subtitle']) ? "<small>{$this->moduleInfo['subtitle']}</small>" : null);?>
         </h1>
       </section>
+<?php
+}
+?>
 
       <section class="content">
 <?php
