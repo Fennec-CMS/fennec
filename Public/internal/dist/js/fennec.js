@@ -50,6 +50,16 @@ $(document).ready(function(){
 			format: 'YYYY-MM-DD HH:mm'
 		});
 	}
+
+	$('textarea').each(function(){
+		var textarea = $(this),
+			editor = textarea;
+		editor.summernote({
+			height: 200
+		}).on('summernote.change', function(customEvent, contents, $editable) {
+			textarea.val(contents);
+		});
+	});
 });
 
 function alert(message, callback) {
