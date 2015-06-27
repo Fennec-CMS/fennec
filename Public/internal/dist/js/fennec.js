@@ -81,7 +81,6 @@ $(document).ready(function(){
 				var newButtonStatus = files[0].name;
 			} else {
 				var newButtonStatus = "No file selected";
-				console.log(newButtonStatus);
 			}
 
 			button.text(newButtonStatus);
