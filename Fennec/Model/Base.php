@@ -19,6 +19,13 @@ class Base
     use \Fennec\Library\Db\Sql;
 
     /**
+     * Base path to send uploads
+     *
+     * @var string
+     */
+    const UPLOAD_BASE_DIR = __DIR__ . '/../../Public/uploads/';
+
+    /**
      * Return a param
      *
      * @param string $param            
