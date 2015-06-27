@@ -64,6 +64,31 @@ $(document).ready(function(){
 	if ("tagsinput" in $(window)) {
 		$('.tagsinput').tagsinput();
 	}
+
+	$('input[data-type="input-file"]').each(function(){
+		var input = $(this),
+			button = $('<button class="btn btn-info btn-block">No file selected</button>');
+
+		button.insertBefore(input).on('click', function(){
+			input.click();
+		});
+
+		input.on('change', function(e){
+			var files = input[0].files;
+			if (files.length > 1) {
+				var newButtonStatus = files.length + " files selected";
+			} else if (files.length == 1) {
+				var newButtonStatus = files[0].name;
+			} else {
+				var newButtonStatus = "No file selected";
+				console.log(newButtonStatus);
+			}
+
+			button.text(newButtonStatus);
+		})
+
+		input.hide();
+	});
 });
 
 function alert(message, callback) {
