@@ -60,6 +60,10 @@ $(document).ready(function(){
 			textarea.val(contents);
 		});
 	});
+
+	if ("tagsinput" in $(window)) {
+		$('.tagsinput').tagsinput();
+	}
 });
 
 function alert(message, callback) {
