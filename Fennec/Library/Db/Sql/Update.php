@@ -128,11 +128,11 @@ class Update
             $update[] = $column . "='" . $value . "'";
         }
         
-        $update = implode("','", $update);
+        $update = implode(", ", $update);
         
         $this->sql = "UPDATE " . $this->table . " SET $update";
         
-        $this->sql .= ($this->where ? " WHERE {$this->limit}" : '');
+        $this->sql .= ($this->where ? " WHERE {$this->where}" : '');
         
         $this->sql .= ($this->limit ? " LIMIT {$this->limit}" : '');
         
