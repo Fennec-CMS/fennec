@@ -119,4 +119,14 @@ class Db
     {
         return self::getConnection()->query($sql);
     }
+
+    /**
+     * Return SQL LAST_INSERT_ID
+     *
+     * @return integer
+     */
+    public static function lastInsertId()
+    {
+        return self::getConnection()->lastInsertId();
+    }
 }

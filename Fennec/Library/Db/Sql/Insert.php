@@ -94,10 +94,21 @@ class Insert
             Db::beginTransaction();
             Db::query($this->sql);
             Db::commit();
+            return $this->lastInsertId();
         } catch (\Exception $e) {
             Db::rollBack();
             throw $e;
         }
+    }
+
+    /**
+     * Return SQL LAST_INSERT_ID
+     *
+     * @return integer
+     */
+    public function lastInsertId()
+    {
+        return Db::lastInsertId();
     }
 
     /**
