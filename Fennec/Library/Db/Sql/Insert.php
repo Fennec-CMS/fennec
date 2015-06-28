@@ -93,8 +93,9 @@ class Insert
         try {
             Db::beginTransaction();
             Db::query($this->sql);
+            $id = $this->lastInsertId();
             Db::commit();
-            return $this->lastInsertId();
+            return $id;
         } catch (\Exception $e) {
             Db::rollBack();
             throw $e;
@@ -108,7 +109,10 @@ class Insert
      */
     public function lastInsertId()
     {
-        return Db::lastInsertId();
+        $select = new Select('MAX(id) AS last_id');
+        $select = $select->from($this->table)->execute()->fetch(\PDO::FETCH_ASSOC);
+        $insertedId = $select['last_id'];
+        return $insertedId;
     }
 
     /**
