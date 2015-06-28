@@ -69,7 +69,8 @@ $(document).ready(function(){
 		var input = $(this),
 			button = $('<button class="btn btn-info btn-block">No file selected</button>');
 
-		button.insertBefore(input).on('click', function(){
+		button.insertBefore(input).on('click', function(e){
+			e.preventDefault();
 			input.click();
 		});
 
