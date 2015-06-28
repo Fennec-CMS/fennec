@@ -34,4 +34,16 @@ trait Limit
         $this->limit = $limit;
         return $this;
     }
+
+    /**
+     * Defines SQL OFFSET
+     *
+     * @param integer $offset
+     * @return \Fennec\Library\Db\Sql\Limit
+     */
+    public function offset($offset)
+    {
+        $this->offset = $offset;
+        return $this;
+    }
 }

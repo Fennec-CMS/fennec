@@ -135,6 +135,8 @@ class Update
         $this->sql .= ($this->where ? " WHERE {$this->where}" : '');
         
         $this->sql .= ($this->limit ? " LIMIT {$this->limit}" : '');
+
+        $this->sql .= ($this->offset ? " OFFSET {$this->offset}" : '');
         
         return $this->sql;
     }

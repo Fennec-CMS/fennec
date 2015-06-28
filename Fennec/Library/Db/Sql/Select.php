@@ -175,8 +175,10 @@ class Select
         
         $limit = ($this->limit ? ' LIMIT ' . $this->limit : '');
         
-        $sql = $select . $from . $join . $where . $order . $group . $limit;
-        
+        $offset = ($this->offset ? ' OFFSET ' . $this->offset : '');
+
+        $sql = $select . $from . $join . $where . $order . $group . $limit . $offset;
+
         $this->sql = $sql;
         return $sql;
     }
