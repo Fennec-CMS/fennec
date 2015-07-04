@@ -24,6 +24,13 @@ trait Limit
     private $limit;
 
     /**
+     * SQL OFFSET
+     *
+     * @var integer
+     */
+    private $offset;
+
+    /**
      * Defines SQL LIMIT
      * 
      * @param integer $limit            
