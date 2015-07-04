@@ -62,10 +62,10 @@ class Router
     public static function dispatch()
     {
         $url = $_SERVER['REQUEST_URI'];
-        $requestedRoute = strstr('/', $url);
-        $requestedRoute = substr($url, $requestedRoute);
+        $requestedRoute = strstr($url, '/');
+        $requestedRoute = substr($url, strpos($url, $requestedRoute));
         
-        if (! $requestedRoute){
+        if (! $requestedRoute) {
             $requestedRoute = "/";
         }
 
@@ -110,9 +110,7 @@ class Router
                 }
 
                 $controller->$action();
-
                 $controller->loadLayout();
-
                 return;
             }
         }
