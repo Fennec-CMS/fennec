@@ -26,6 +26,13 @@ class Base
     const UPLOAD_BASE_DIR = __DIR__ . '/../../Public/uploads/';
 
     /**
+     * Regular expression to match date formats
+     *
+     * @var string
+     */
+    private $dateFormats = '/[0-9]{4}-[0-9]{2}-[0-9]{2}(?: [0-9]{2}:[0-9]{2}:[0-9]{2})?$/';
+
+    /**
      * Return a param
      *
      * @param string $param            
@@ -64,6 +71,10 @@ class Base
             $this->$param = $arguments[0];
             return $this;
         } elseif ($type == "get") {
+            if (! ($this->$param instanceof \DateTime) && preg_match($this->dateFormats, $this->$param)) {
+                $this->$param = new \DateTime($this->$param);
+            }
+
             return $this->$param;
         } else {
             throw new \BadMethodCallException("Method $name don't exists");
