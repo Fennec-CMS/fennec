@@ -64,9 +64,9 @@ trait Head
      * @param array $data array containing all properties for this meta tag
      * @example addmetaTag(array('name' => 'robots', 'content' => 'nofollow,noindex'));
      */
-    public function addMetaTag(array $data)
+    public function addMetaTag($identifier, array $data)
     {
-        self::$metaTags[] = $data;
+        self::$metaTags[$identifier] = $data;
     }
 
     /**
@@ -114,7 +114,7 @@ trait Head
      */
     public function setCharset($charset)
     {
-        $this->addMetaTag(array(
+        $this->addMetaTag('charset', array(
             'charset' => $charset
         ));
     }
