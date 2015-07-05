@@ -51,7 +51,7 @@ $(document).ready(function(){
 		});
 	}
 
-	$('textarea').each(function(){
+	$('textarea:not(.no-richtext)').each(function(){
 		var textarea = $(this),
 			editor = textarea;
 		editor.summernote({
