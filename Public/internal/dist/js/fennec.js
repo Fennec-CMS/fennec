@@ -52,13 +52,8 @@ $(document).ready(function(){
 	}
 
 	$('textarea:not(.no-richtext)').each(function(){
-		var textarea = $(this),
-			editor = textarea;
-		editor.summernote({
-			height: 200
-		}).on('summernote.change', function(customEvent, contents, $editable) {
-			textarea.val(contents);
-		});
+		var id = ($(this).attr('id') ? $(this).attr('id') : 'editor-' + (Math.random() * 100));
+		CKEDITOR.replace(id);
 	});
 
 	if ("tagsinput" in $(window)) {
