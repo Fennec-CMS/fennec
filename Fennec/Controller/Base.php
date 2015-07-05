@@ -18,6 +18,19 @@ use Fennec\Library\Router;
  */
 class Base
 {
+    use \Fennec\Library\Head;
+
+    /**
+     * Base constructor
+     */
+    public function __construct()
+    {
+        $this->setCharset("utf-8");
+        $this->setTitle("Fennec CMS");
+        $this->addCss("bootstrap", "/assets/css/bootstrap.min.css");
+        $this->addScript("jquery", "/assets/js/jquery-2.1.4.min.js");
+        $this->addScript("bootstrap", "/assets/js/bootstrap.min.js");
+    }
 
     /**
      * Layout to load.

@@ -38,6 +38,7 @@ class Index extends Base
      */
     public function __construct()
     {
+        parent::__construct();
         if (! $this->isAuthenticated()) {
             $this->layout('Admin/Unauthenticated');
             $this->module = false;
