@@ -42,6 +42,13 @@ CKEDITOR.stylesSet.add( 'default', [
 			border: '1px solid #ccc'
 		}
 	},
+	{
+		name: 'Clearfix',
+		element: 'div',
+		styles: {
+			clear: 'both'
+		}
+	},
 
 	/* Inline Styles */
 
