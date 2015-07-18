@@ -40,4 +40,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.protectedSource.push( /<\?[\s\S]*?\?>/g );   // PHP code
 	config.protectedSource.push( /<%[\s\S]*?%>/g );   // ASP code
 	config.protectedSource.push( /(]+>[\s|\S]*?<\/asp:[^\>]+>)|(]+\/>)/gi );   // ASP.Net code
+	
+	// Enable text alignment
+	config.extraPlugins = 'justify';
 };
