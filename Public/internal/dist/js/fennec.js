@@ -51,9 +51,24 @@ $(document).ready(function(){
 		});
 	}
 
-	$('textarea:not(.no-richtext)').each(function(){
-		var id = ($(this).attr('id') ? $(this).attr('id') : 'editor-' + (Math.random() * 100));
-		CKEDITOR.replace(id);
+	
+	tinymce.init({
+		selector: "textarea:not(.no-richtext)",
+		theme: "modern",
+		cleanup: false,
+		verify_html: false,
+		plugins: [
+			"advlist autolink lists link image charmap print preview hr anchor pagebreak",
+			"searchreplace wordcount visualblocks visualchars code fullscreen",
+			"insertdatetime media nonbreaking table contextmenu directionality",
+			"emoticons template paste textcolor"
+		],
+		relative_urls: false,
+		browser_spellcheck : true ,
+		image_advtab: true,
+		menubar: false,
+		toolbar1: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | responsivefilemanager media image",
+		toolbar2: "preview media | forecolor backcolor emoticons code"
 	});
 
 	if ("tagsinput" in $(window)) {
