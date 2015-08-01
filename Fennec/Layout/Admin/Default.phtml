@@ -71,7 +71,10 @@ foreach ($this->menu as $title => $menu) {
     $class = array();
     $isMultilevel = (isset($menu['subitems']) && count($menu['subitems']));
     $class[] = ($isMultilevel ? 'treeview' : '');
-    $controller = addslashes(Fennec\Library\Router::$routes[$menu['route']]['controller']);
+    
+    $module = (isset(Fennec\Library\Router::$routes[$menu['route']]['module']) ? "\\Modules\\" . Fennec\Library\Router::$routes[$menu['route']]['module'] : null) . '\\Controller\\';
+    
+    $controller = "Fennec" . addslashes($module . Fennec\Library\Router::$routes[$menu['route']]['controller']);
 
     if (preg_match("/$controller/", get_class($this))) {
         $class[] = 'active';
