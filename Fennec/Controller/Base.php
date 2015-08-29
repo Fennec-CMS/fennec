@@ -9,12 +9,13 @@ namespace Fennec\Controller;
 
 use Fennec\Library\Http;
 use Fennec\Library\Router;
+use Fennec\Library\View;
 
 /**
  * Base controller
  *
  * @author David Lima
- * @version b0.1
+ * @version b0.3
  */
 class Base
 {
@@ -77,26 +78,6 @@ class Base
     }
 
     /**
-     * Load a view
-     *
-     * @param string $viewFile
-     */
-    public function loadView($viewFile)
-    {
-        if ($this->module) {
-            $viewFile = __DIR__ . "/../$viewFile.phtml";
-        } else {
-            $viewFile = __DIR__ . "/../View/$viewFile.phtml";
-        }
-
-        if (file_exists($viewFile)) {
-            require_once ($viewFile);
-        } else {
-            $this->throwHttpError(404);
-        }
-    }
-
-    /**
      * Sets a GET param
      *
      * @param string $key
@@ -153,6 +134,7 @@ class Base
     {
         if ($this->layout) {
             try {
+                $this->view = new View($this->view, $this->module);
                 require_once ($this->layout);
             } catch (\Exception $e) {
                 $this->exception = $e;
