@@ -82,7 +82,16 @@ foreach ($this->menu as $title => $menu) {
     $class = implode(" ", $class);
 ?>
             <li<?php echo $class ? " class=\"$class\"" : null;?>>
-                <a href="<?php echo Fennec\Library\Router::$routes[$menu['route']]['original-route'];?>"><?php echo $title;?></a>
+                <a href="<?php echo Fennec\Library\Router::$routes[$menu['route']]['original-route'];?>">
+<?php
+    if (isset($menu['icon']) && $menu['icon']) {
+?>
+                    <i class="<?php echo $menu['icon'];?>"></i>
+<?php
+    }
+?>
+                    <span><?php echo $title;?></span>
+                </a>
 <?php
     if ($isMultilevel) {
 ?>
