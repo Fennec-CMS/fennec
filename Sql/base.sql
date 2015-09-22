@@ -4,7 +4,7 @@ CREATE TABLE administrators (
   profile INT,
   username VARCHAR(32),
   email VARCHAR(255),
-  since DATE,
+  since DATE DEFAULT NOW(),
   id SERIAL
 );
 
