@@ -9,11 +9,11 @@ CREATE TABLE administrators (
 );
 
 CREATE TABLE settings (
-	module VARCHAR(255) NOT NULL,
-	key VARCHAR(255) NOT NULL,
-	value VARCHAR(255),
-	lastchange TIMESTAMP DEFAULT NOW(),
-	PRIMARY KEY(module,key)
+  module VARCHAR(255) NOT NULL,
+  key VARCHAR(255) NOT NULL,
+  value VARCHAR(255),
+  lastchange TIMESTAMP DEFAULT NOW(),
+  PRIMARY KEY(module,key)
 );
 
 /*
