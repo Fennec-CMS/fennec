@@ -8,6 +8,14 @@ CREATE TABLE administrators (
   id SERIAL
 );
 
+CREATE TABLE settings (
+	module VARCHAR(255) NOT NULL,
+	key VARCHAR(255) NOT NULL,
+	value VARCHAR(255),
+	lastchange TIMESTAMP DEFAULT NOW(),
+	PRIMARY KEY(module,key)
+);
+
 /*
 Default password is: 123456
 To generate a different password, please run:
