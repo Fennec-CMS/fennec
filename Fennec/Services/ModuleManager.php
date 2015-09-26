@@ -26,6 +26,13 @@ class ModuleManager
      * @var string
      */
     const MODULE_REPOS = __DIR__ . '/../Config/ModuleRepos.php';
+    
+    /**
+     * Temporary directory to save downloads
+     * 
+     * @var string
+     */
+    const TMP_DIR = '../.tmp';
 
     /**
      * List of repositories fetched from self::MODULE_REPOS file
@@ -89,7 +96,11 @@ class ModuleManager
             throw new \Exception("Module {$module['name']} already exists.");
         }
         
-        $tempFilename = 'tmp/' . uniqid('module-') . '.tar.gz';
+        if (! is_dir(self::TMP_DIR) || ! is_writable(self::TMP_DIR)) {
+            throw new \Exception(__DIR__ . '/' . self::TMP_DIR . ' must exists and be writable to continue');
+        }
+        
+        $tempFilename = self::TMP_DIR . '/' . uniqid('module-') . '.tar.gz';
         $release = $module['release'];
         $ch = curl_init($release);
         curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
