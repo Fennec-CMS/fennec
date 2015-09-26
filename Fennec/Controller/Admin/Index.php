@@ -15,7 +15,7 @@ use Fennec\Library\Router;
  * Administration base controller
  * 
  * @author David Lima
- * @version b0.1
+ * @version b0.2
  */
 class Index extends Base
 {
@@ -113,5 +113,20 @@ class Index extends Base
         if (file_exists($menuFile)) {
             $this->menu = require_once($menuFile);
         }
+        
+        $modulesDir = __DIR__ . '/../../Modules';
+        $modulesDirIterator = new \DirectoryIterator($modulesDir);
+        foreach ($modulesDirIterator as $module) {
+            if ($module->isDot()) {
+                continue;
+            }
+            
+            if (file_exists($modulesDir . "/$module/" .  '/Admin/Menu.php')) {
+                $moduleMenu = require_once($modulesDir . "/$module/" . '/Admin/Menu.php');
+                $this->menu = array_merge($this->menu, $moduleMenu);
+            }
+            
+        }
+        
     }
 }
