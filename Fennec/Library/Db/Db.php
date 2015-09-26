@@ -119,4 +119,14 @@ class Db
     {
         return self::getConnection()->query($sql);
     }
+    
+    /**
+     * Execute a SQL query using PDO::exec()
+     * 
+     * @param string $sql
+     */
+    public static function exec($sql)
+    {
+        self::getConnection()->exec($sql);
+    }
 }
