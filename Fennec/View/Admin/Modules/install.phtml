@@ -1,0 +1,26 @@
+<div class="pull-left">
+    <div class="btn-group">
+        <a href="<?php echo $this->linkToRoute('admin-modules-list');?>" class="btn btn-success"><i class="fa fa-puzzle-piece"></i> View installed modules</a>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<br>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+<?php
+if (isset($this->result)) {
+    $status = ($this->result['error'] ? 'danger' : 'success');
+    echo Fennec\Library\Alerts::Create($status, $this->result['result']);
+}
+?>
+
+<?php
+    echo $this->result['message'];
+    echo '<br>';
+?>
+    <a href="<?php echo $this->linkToRoute('admin-modules-available');?>" class="btn btn-info"><i class="fa fa-puzzle-piece"></i> Available modules</a>
+    </div>
+</div>

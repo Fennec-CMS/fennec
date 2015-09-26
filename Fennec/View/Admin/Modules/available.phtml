@@ -1,0 +1,32 @@
+<div class="pull-left">
+    <div class="btn-group">
+        <a href="<?php echo $this->linkToRoute('admin-modules-list');?>" class="btn btn-success"><i class="fa fa-puzzle-piece"></i> View installed modules</a>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<br>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+    
+<div class="list-group">
+<?php
+foreach ($this->list as $module) {
+?>
+    <div class="list-group-item">
+        <span class="badge alert-info"><?php echo $module['version'];?></span>
+        <h4 class="list-group-item-heading"><?php echo $module['name'];?></h4>
+        <p class="list-group-item-text"><?php echo $module['description'];?></p>
+        <hr>
+        <a href="<?php echo $this->linkToRoute('admin-module-install', array($module['name']));?>" class="btn btn-default"><i class="fa fa-download"></i> Install</a>
+    </div>
+  
+<?php
+}
+?>
+</div>
+
+    </div>
+</div>

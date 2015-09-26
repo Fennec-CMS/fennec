@@ -1,0 +1,33 @@
+<div class="pull-left">
+    <div class="btn-group">
+        <a href="<?php echo $this->linkToRoute('admin-modules-available');?>" class="btn btn-success"><i class="fa fa-puzzle-piece"></i> Check available modules</a>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<br>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Module</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+<?php
+foreach ($this->list as $module) {
+?>
+                <tr>
+                    <td><?php echo $module->name;?></td>
+                </tr>
+<?php
+}
+?>
+            </tbody>
+        </table>
+    </div>
+</div>

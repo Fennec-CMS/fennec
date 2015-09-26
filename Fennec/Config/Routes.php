@@ -63,6 +63,30 @@ $routes = array(
         'controller' => 'Admin\\Administrators',
         'action' => 'profile',
         'layout' => 'Admin/Default'
+    ),
+    array(
+        'name' => 'admin-modules',
+        'route' => '/admin/modules/',
+        'controller' => 'Admin\\Modules',
+        'action' => 'list',
+        'layout' => 'Admin/Default'
+    ),
+    array(
+        'name' => 'admin-modules-available',
+        'route' => '/admin/modules/available/',
+        'controller' => 'Admin\\Modules',
+        'action' => 'available',
+        'layout' => 'Admin/Default'
+    ),
+    array(
+        'name' => 'admin-module-install',
+        'route' => '/admin/modules/install/([a-zA-Z0-9]+)/',
+        'params' => array(
+            'name'
+        ),
+        'controller' => 'Admin\\Modules',
+        'action' => 'install',
+        'layout' => 'Admin/Default'
     )
 );
 

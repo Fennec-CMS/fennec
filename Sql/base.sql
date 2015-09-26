@@ -16,6 +16,18 @@ CREATE TABLE settings (
   PRIMARY KEY(module,key)
 );
 
+CREATE TABLE modules (
+  name VARCHAR(128) NOT NULL,
+  description TEXT,
+  version VARCHAR(24),
+  source VARCHAR(255),
+  release VARCHAR(255),
+  installdate TIMESTAMP,
+  updatedate TIMESTAMP,
+  userinstalled INT,
+  PRIMARY KEY (name)
+);
+
 /*
 Default password is: 123456
 To generate a different password, please run:
