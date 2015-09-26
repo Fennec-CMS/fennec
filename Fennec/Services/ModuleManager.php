@@ -8,6 +8,7 @@
 namespace Fennec\Services;
 
 #use Fennec\Library\Db\Sql\Select;
+use Fennec\Library\Db\Db;
 
 /**
  * Module manager service
@@ -75,5 +76,66 @@ class ModuleManager
         unset($modulesList);
         
         return self::$modulesList;
+    }
+    
+    /**
+     * Downloads and install a module
+     * 
+     * @param string $module
+     */
+    public static function install($module)
+    {
+        if (is_dir("../Fennec/Modules/{$module['name']}")) {
+            throw new \Exception("Module {$module['name']} already exists.");
+        }
+        
+        $tempFilename = 'tmp/' . uniqid('module-') . '.tar.gz';
+        $release = $module['release'];
+        $ch = curl_init($release);
+        curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, \CURLOPT_SSL_VERIFYPEER, 0); # HTTPS workaround
+        curl_setopt($ch, \CURLOPT_FOLLOWLOCATION, 1);
+        $data = curl_exec($ch);
+        $tar = fopen($tempFilename, 'w');
+        fwrite($tar, $data);
+        fclose($tar);
+        `tar -xf $tempFilename -C ../Fennec/Modules`;
+        $moduleDir = "../Fennec/Modules/{$module['name']}"; 
+        $sqlFile = $moduleDir . "/Sql/base.sql";
+        
+        if (file_exists($sqlFile)) {
+            Db::exec(file_get_contents($sqlFile));
+        }
+        unlink($tempFilename);
+    }
+    
+    /**
+     * Remove module folder and run the Sql/uninstall.sql file if it exists
+     * 
+     * @param string $moduleName
+     *                  Module to uninstall (must be the exact name of the module folder)
+     * @param boolean $keepSettings
+     *                  If false, delete all module settings of the 'settings' table. Otherwise, keep it. 
+     * @throws \Exception
+     * @return boolean
+     */
+    public static function uninstall($moduleName, $keepSettings = true)
+    {
+        $moduleDir = "../Fennec/Modules/{$moduleName}";
+        if (! is_dir($moduleDir)) {
+            throw new \Exception("Module {$moduleName} not exists");
+        }
+        
+        if (file_exists($moduleDir . '/Sql/uninstall.sql')) {
+            Db::exec(file_get_contents($moduleDir . '/Sql/uninstall.sql'));
+        }
+        
+        if (! $keepSettings) {
+            Db::query("DELETE FROM settings WHERE module = '{$moduleName}'");
+        }
+        
+        `rm -rf {$moduleDir}`;
+        
+        return true;
     }
 }
