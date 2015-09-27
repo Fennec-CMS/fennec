@@ -90,7 +90,7 @@ class ModuleManager
      * 
      * @param string $module
      */
-    public static function install($module)
+    public static function install($module, callable $callback)
     {
         if (is_dir("../Fennec/Modules/{$module['name']}")) {
             throw new \Exception("Module {$module['name']} already exists.");
@@ -118,6 +118,10 @@ class ModuleManager
             Db::exec(file_get_contents($sqlFile));
         }
         unlink($tempFilename);
+        
+        if (is_callable($callback)) {
+            $callback();
+        }
     }
     
     /**
