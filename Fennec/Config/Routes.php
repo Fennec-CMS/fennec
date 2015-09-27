@@ -87,6 +87,16 @@ $routes = array(
         'controller' => 'Admin\\Modules',
         'action' => 'install',
         'layout' => 'Admin/Default'
+    ),
+    array(
+        'name' => 'admin-module-uninstall',
+        'route' => '/admin/modules/uninstall/([a-zA-Z0-9]+)/',
+        'params' => array(
+            'name'
+        ),
+        'controller' => 'Admin\\Modules',
+        'action' => 'uninstall',
+        'layout' => 'Admin/Default'
     )
 );
 

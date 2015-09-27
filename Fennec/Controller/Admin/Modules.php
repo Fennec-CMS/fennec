@@ -128,4 +128,37 @@ class Modules extends AdminController
         $this->result = $result;
         return $this->result;
     }
+    
+    /**
+     * Permanently uninstall a module
+     *
+     * @return array
+     */
+    public function uninstallAction()
+    {
+        $this->moduleInfo = array(
+            'title' => 'Module installation'
+        );
+        
+        $moduleName = $this->getParam('name');
+        
+        $result = array(
+            'result' => null,
+            'error' => false
+        );
+        
+        try {
+            ModuleManager::uninstall($moduleName, false);
+            $this->model->name = $moduleName;
+            $unregister = $this->model->unregister();
+            $result['result'] = "Module <b>{$moduleName}</b> successfully uninstalled!";
+        } catch (\Exception $e) {
+            $result['result'] = "Failed to uninstall: " . $e->getMessage();
+            $result['error'] = true;
+        }
+        
+        $this->result = $result;
+
+        return $result;
+    }
 }
