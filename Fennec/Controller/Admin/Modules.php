@@ -107,7 +107,17 @@ class Modules extends AdminController
             $result['error'] = true;
         } else {
             try {
-                ModuleManager::install($fetchedModule);
+                ModuleManager::install($fetchedModule, function() use ($fetchedModule) {
+                    $this->model->setName($fetchedModule['name']);
+                    $this->model->setDescription($fetchedModule['description']);
+                    $this->model->setVersion($fetchedModule['version']);
+                    $this->model->setSource($fetchedModule['source']);
+                    $this->model->setRelease($fetchedModule['release']);
+                    $this->model->setInstalldate(date('Y-m-d H:i:s'));
+                    $this->model->setUserinstalled($_SESSION['fennecAdmin']->getId());
+                    $result = $this->model->register();
+                });
+                
                 $result['result'] = "Module <b>{$moduleName}</b> successfully installed!";
             } catch(\Exception $e) {
                 $result['result'] = "Failed to install <b>{$moduleName}</b>.<br>" . $e->getMessage();
