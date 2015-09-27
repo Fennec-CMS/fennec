@@ -15,7 +15,7 @@ use Fennec\Library\Db\Db;
  * This service is useful to check, install and update Fennec's modules
  *
  * @author David Lima
- * @version b0.1
+ * @version b0.2
  * @todo Implement methods to install and update modules
  */
 class ModuleManager
@@ -92,7 +92,7 @@ class ModuleManager
      */
     public static function install($module, callable $callback)
     {
-        if (is_dir("../Fennec/Modules/{$module['name']}")) {
+        if (self::isInstalled($module['name'])) {
             throw new \Exception("Module {$module['name']} already exists.");
         }
         
@@ -137,7 +137,7 @@ class ModuleManager
     public static function uninstall($moduleName, $keepSettings = true)
     {
         $moduleDir = "../Fennec/Modules/{$moduleName}";
-        if (! is_dir($moduleDir)) {
+        if (! self::isInstalled($moduleName)) {
             throw new \Exception("Module {$moduleName} not exists");
         }
         
@@ -152,5 +152,17 @@ class ModuleManager
         `rm -rf {$moduleDir}`;
         
         return true;
+    }
+    
+    /**
+     * Checks if a module is already installed
+     * 
+     * @param string $moduleName must be the exact name of installed module (case-sensitive)
+     * @return bool
+     */
+    public static function isInstalled($moduleName)
+    {
+        $moduleDir = "../Fennec/Modules/{$moduleName}";
+        return is_dir($moduleDir);
     }
 }
