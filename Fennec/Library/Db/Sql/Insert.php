@@ -13,7 +13,7 @@ use Fennec\Library\Db\Db;
  * SQL Update class
  *
  * @author David Lima
- * @version b0.1
+ * @version b0.2
  */
 class Insert
 {
@@ -103,12 +103,23 @@ class Insert
     }
 
     /**
-     * Return SQL LAST_INSERT_ID
+     * Check if column 'id' exists on $this->table and return it
      *
-     * @return integer
+     * @return integer Last inserted ID case column 'id' exists. 1 Otherwise
      */
     public function lastInsertId()
     {
+
+        $selectColumns = new Select("*");
+        $selectColumns = array_keys($selectColumns->from($this->table)
+                        ->limit(1)
+                        ->execute()
+                        ->fetch(\PDO::FETCH_ASSOC));
+        
+        if (! in_array('id', $selectColumns)) {
+            return 1;
+        }
+        
         $select = new Select('MAX(id) AS last_id');
         $select = $select->from($this->table)->execute()->fetch(\PDO::FETCH_ASSOC);
         $insertedId = $select['last_id'];
