@@ -16,11 +16,6 @@ if (isset($this->result)) {
     echo Fennec\Library\Alerts::Create($status, $this->result['result']);
 }
 ?>
-
-<?php
-    echo $this->result['message'];
-    echo '<br>';
-?>
     <a href="<?php echo $this->linkToRoute('admin-modules-available');?>" class="btn btn-info"><i class="fa fa-puzzle-piece"></i> Available modules</a>
     </div>
 </div>
