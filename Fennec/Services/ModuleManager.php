@@ -32,7 +32,7 @@ class ModuleManager
      * 
      * @var string
      */
-    const TMP_DIR = '../.tmp';
+    const TMP_DIR = __DIR__ . '/../.tmp';
 
     /**
      * List of repositories fetched from self::MODULE_REPOS file
@@ -97,7 +97,7 @@ class ModuleManager
         }
         
         if (! is_dir(self::TMP_DIR) || ! is_writable(self::TMP_DIR)) {
-            throw new \Exception(__DIR__ . '/' . self::TMP_DIR . ' must exists and be writable to continue');
+            throw new \Exception(self::TMP_DIR . ' must exists and be writable to continue');
         }
         
         $tempFilename = self::TMP_DIR . '/' . uniqid('module-') . '.tar.gz';
