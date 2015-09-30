@@ -14,6 +14,7 @@
             <thead>
                 <tr>
                     <th>Module</th>
+                    <th>Version</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@ foreach ($this->list as $module) {
 ?>
                 <tr>
                     <td><?php echo $module->name;?></td>
+                    <td><?php echo $module->version;?></td>
                     <td>
                         <a href="#" onclick="confirm('You really want to delete this module and all data within? This action may cause data lost!', function() {location.href='<?php echo $this->linkToRoute('admin-module-uninstall', array($module->name));?>';});return false;">
                             <i class="fa fa-trash btn btn-danger"></i>
