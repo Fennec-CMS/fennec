@@ -14,7 +14,7 @@ use Fennec\Model\Administrators as AdministratorsModel;
  * Administrators default controller
  *
  * @author David Lima
- * @version b0.1
+ * @version 0.3
  */
 class Administrators extends AdminController
 {
@@ -35,8 +35,8 @@ class Administrators extends AdminController
         $this->model = new AdministratorsModel();
 
         $this->moduleInfo = array(
-            'title' => 'Administrators',
-            'subtitle' => 'Manage website administrators'
+            'title' => $this->translate('Administrators'),
+            'subtitle' => $this->translate('Manage website administrators')
         );
     }
 

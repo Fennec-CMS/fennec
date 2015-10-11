@@ -15,7 +15,7 @@ use Fennec\Library\Router;
  * Administration base controller
  * 
  * @author David Lima
- * @version b0.1
+ * @version 0.3
  */
 class Index extends Base
 {
@@ -68,7 +68,7 @@ class Index extends Base
 
             if (! $this->isAuthenticated()) {
                 $this->errors = array(
-                    'Cannot authenticate you :('
+                    $this->translate('Cannot authenticate you')
                 );
             }
         }

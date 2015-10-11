@@ -30,7 +30,7 @@
 
       <nav class="navbar navbar-static-top" role="navigation">
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-          <span class="sr-only">Toggle navigation</span>
+          <span class="sr-only"><?php echo $this->translate('Toggle navigation');?></span>
         </a>
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
@@ -43,16 +43,16 @@
                 <li class="user-header">
                   <img src="/internal/dist/img/fennec/logo-blue.png" class="img-circle" alt="User Image" />
                   <p>
-                   <?php echo $_SESSION['fennecAdmin']->getName();?> <small>Administrator since <?php echo $_SESSION['fennecAdmin']->getSince()->format('M. Y');?></small>
+                   <?php echo $_SESSION['fennecAdmin']->getName();?> <small><?php echo $this->translate('Administrator since') . ' ' . $_SESSION['fennecAdmin']->getSince()->format('M. Y');?></small>
                   </p>
                 </li>
 
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="<?php echo $this->linkToRoute('admin-administrators-profile', array($_SESSION['fennecAdmin']->getId()));?>" class="btn btn-default btn-flat">Profile</a>
+                    <a href="<?php echo $this->linkToRoute('admin-administrators-profile', array($_SESSION['fennecAdmin']->getId()));?>" class="btn btn-default btn-flat"><?php echo $this->translate('Profile');?></a>
                   </div>
                   <div class="pull-right">
-                    <a href="<?php echo $this->linkToRoute('admin-logout');?>" class="btn btn-default btn-flat">Sign out</a>
+                    <a href="<?php echo $this->linkToRoute('admin-logout');?>" class="btn btn-default btn-flat"><?php echo $this->translate('Sign out');?></a>
                   </div>
                 </li>
               </ul>
@@ -65,7 +65,7 @@
 
       <section class="sidebar">
         <ul class="sidebar-menu">
-          <li class="header">MODULES</li>
+          <li class="header"><?php echo $this->translate('MODULES');?></li>
 <?php
 foreach ($this->menu as $title => $menu) {
     $class = array();
@@ -157,7 +157,7 @@ require_once($this->view);
     </div>
 
     <footer class="main-footer">
-      <div class="pull-right hidden-xs text-gray">b0.2</div>
+      <div class="pull-right hidden-xs text-gray">b0.3</div>
       <strong>&nbsp;</strong>
     </footer>
   </div>

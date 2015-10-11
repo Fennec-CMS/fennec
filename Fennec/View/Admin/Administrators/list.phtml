@@ -1,6 +1,6 @@
 <div class="pull-left">
     <div class="btn-group">
-        <a href="<?php echo $this->linkToRoute('admin-administrators-add');?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> Create new</a>
+        <a href="<?php echo $this->linkToRoute('admin-administrators-add');?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> <?php echo $this->translate('Create new');?></a>
     </div>
 </div>
 
@@ -13,10 +13,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Actions</th>
+                    <th><?php echo $this->translate('Name');?></th>
+                    <th><?php echo $this->translate('Username');?></th>
+                    <th><?php echo $this->translate('Email');?></th>
+                    <th><?php echo $this->translate('Actions');?></th>
                 </tr>
             </thead>
             <tbody>

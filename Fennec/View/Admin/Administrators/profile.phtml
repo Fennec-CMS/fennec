@@ -1,6 +1,6 @@
 <div class="pull-left">
     <div class="btn-group">
-        <a href="<?php echo $this->linkToRoute('admin-administrators-list');?>" class="btn btn-success"><i class="fa fa-arrow-circle-left"></i> Back to list</a>
+        <a href="<?php echo $this->linkToRoute('admin-administrators-list');?>" class="btn btn-success"><i class="fa fa-arrow-circle-left"></i> <?php echo $this->translate('Back to list');?></a>
     </div>
 </div>
 
@@ -10,12 +10,12 @@
 
 <div class="panel panel-default">
     <div class="panel-body">
-        <p><b>Name:</b> <?php echo $this->profile->getName();?></p>
-        <p><b>Username:</b> <?php echo $this->profile->getUsername();?></p>
+        <p><b><?php echo $this->translate('Name');?>:</b> <?php echo $this->profile->getName();?></p>
+        <p><b><?php echo $this->translate('Username');?>:</b> <?php echo $this->profile->getUsername();?></p>
 <?php
 if ($this->profile->getEmail()) {
 ?>
-        <p><b>Email:</b> <?php echo $this->profile->getEmail();?></p>
+        <p><b><?php echo $this->translate('Email');?>:</b> <?php echo $this->profile->getEmail();?></p>
 <?php
 }
 ?>

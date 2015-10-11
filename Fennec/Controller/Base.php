@@ -15,12 +15,19 @@ use Fennec\Library\View;
  * Base controller
  *
  * @author David Lima
- * @version b0.3
+ * @version 0.3
  */
 class Base
 {
     use \Fennec\Library\Head;
 
+    /**
+     * Default system language (en_US)
+     * 
+     * @var string
+     */
+    const LANGUAGE = 'en_US';
+    
     /**
      * Base constructor
      */
@@ -167,6 +174,21 @@ class Base
         }
 
         return $link;
+    }
+    
+    /**
+     * Translate a string to a language (self::LANGUAGE) using gettext
+     * 
+     * @param string $word
+     * @return string
+     */
+    public function translate($word)
+    {
+        setlocale(\LC_ALL, self::LANGUAGE);
+        bindtextdomain(self::LANGUAGE, __DIR__ . '/../i18n/locale/');
+        textdomain(self::LANGUAGE);
+        
+        return gettext($word);
     }
 
     /**
