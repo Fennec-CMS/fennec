@@ -125,7 +125,7 @@ class Update
         $update = array();
         
         foreach ($this->data as $column => $value) {
-            $update[] = $column . "='" . $value . "'";
+            $update[] = $column . (is_null($value) ? " = NULL" : "='" . $value . "'");
         }
         
         $update = implode(", ", $update);
