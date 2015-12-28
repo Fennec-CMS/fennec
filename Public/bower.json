@@ -1,0 +1,20 @@
+{
+  "name": "Fennec CMS",
+  "homepage": "https://github.com/Fennec-CMS/fennec",
+  "authors": [
+    "David <dave@blogdodave.com.br>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/plugins/",
+    "test",
+    "tests"
+  ]
+}
