@@ -99,6 +99,39 @@ $(document).ready(function(){
 
 		input.hide();
 	});
+	
+	$('tbody.tr-draggable').each(function() {
+	  var tbody = $(this);
+	  tbody.sortable({
+	    placeholder: 'placeholder',
+	    update: function() {
+	      var banners = new Array();
+	      $.each(tbody.find('tr'), function(i, obj) {
+	        item = {
+	            id: $(obj).data('id'),
+	            index: i
+	        };
+	        banners.push(item);
+	      });
+	      $.ajax({
+	        url: '/admin/slider/reorder/',
+	        data: {
+	          banners: banners,
+	        },
+	        type: 'POST',
+	        beforeSend: function() {
+	          $('body').css('cursor', 'busy');
+	        },
+	        success: function(data) {
+	          console.log(data);
+	        },
+	        complete: function() {
+	          $('body').css('cursor', '');
+	        }
+	      });
+	    }
+	  });
+	});
 });
 
 function alert(message, callback) {
